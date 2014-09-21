@@ -3,6 +3,7 @@ public class Percolation {
     private WeightedQuickUnionUF wqf;
     private int size;
     public Percolation(int N) {
+	if (N <= 0) throw new IllegalArgumentException();
 	open = new boolean[N][N];
 	size = N;
 	int i = 0,j = 0;
@@ -56,7 +57,7 @@ public class Percolation {
 	for(j=1; j<=size; j++) {
 	    if(isOpen(size,j)) {
 		for(i=1;i<=size;i++) {
-		    if(wqf.connected((size-1)*size+j, i))
+		    if(wqf.connected(((size-1)*size+j) - 1, i-1))
 			return true;
 		}
 	    }
