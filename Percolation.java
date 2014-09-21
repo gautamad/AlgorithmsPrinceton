@@ -56,12 +56,26 @@ public class Percolation {
 	for(j=1; j<=size; j++) {
 	    if(isOpen(size,j)) {
 		for(i=1;i<=size;i++) {
-		    if(wqf.connected((size-1)*size+j, i))
+		    if(wqf.connected(((size-1)*size+j) - 1, i-1))
 			return true;
 		}
 	    }
 	}
 	return false;
     }
-	    
+  
+    public static void main(String [] args) {
+	int openItems = 0;
+	
+	In in= new In(args[0]);
+	int N = in.readInt();
+	Percolation perc = new Percolation(N);
+	while (!in.isEmpty()) {
+	    int i = in.readInt();
+	    int j = in.readInt();
+	    perc.open(i,j);
+	    openItems++;
+	    if(perc.percolates()) System.out.println("Percolates at " + openItems);
+	}
+    }
 }

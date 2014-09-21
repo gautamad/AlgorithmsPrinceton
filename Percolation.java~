@@ -44,7 +44,7 @@ public class Percolation {
 	if(i<1 || i>size || j<1 ||j>size) throw new IndexOutOfBoundsException();
 	
 	for(int k=0; k<size; k++) {
-	    if(isOpen(i,j) && wqf.connected(k,k*(i-1)+j-1)) {
+	    if(isOpen(i,j) && wqf.connected(k,size*(i-1)+j-1)) {
 		return true;
 	    }
 	}
@@ -63,5 +63,19 @@ public class Percolation {
 	}
 	return false;
     }
-	    
+  
+    public static void main(String [] args) {
+	int openItems = 0;
+	
+	In in= new In(args[0]);
+	int N = in.readInt();
+	Percolation perc = new Percolation(N);
+	while (!in.isEmpty()) {
+	    int i = in.readInt();
+	    int j = in.readInt();
+	    perc.open(i,j);
+	    openItems++;
+	    if(perc.percolates()) System.out.println("Percolates at " + openItems);
+	}
+    }
 }
