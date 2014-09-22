@@ -43,10 +43,13 @@ public class Percolation {
     
     public boolean isFull(int i, int j) {
 	if(i<1 || i>size || j<1 ||j>size) throw new IndexOutOfBoundsException();
-	
-	for(int k=0; k<size; k++) {
-	    if(isOpen(i,j) && wqf.connected(k,size*(i-1)+j-1)) {
-		return true;
+	if(isOpen(i,j)) {
+	    for(int k=0; k<size; k++) {
+		if(isOpen(1,k+1)) {
+		    if(wqf.connected(k,size*(i-1)+j-1)) {
+			return true;
+		    }
+		}
 	    }
 	}
 	return false;
